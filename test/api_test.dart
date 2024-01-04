@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 
-const kBaseUrl = 'http://localhost:3000';
+const kBaseUrl = 'https://usercrud-xi.vercel.app/';
 main() {
   test('API Add user test', () async {
     var username = 'admin';
@@ -11,7 +11,7 @@ main() {
     var name = 'Administrator';
     var email = 'admin@gmail.com';
     var response = await http.post(
-      Uri.parse('$kBaseUrl/users'),
+      Uri.parse('$kBaseUrl/user'),
       body: {
         'username': username,
         'password': password,
@@ -32,7 +32,7 @@ main() {
   });
 
   test('API Get all users', () async {
-    var response = await http.get(Uri.parse('$kBaseUrl/users'));
+    var response = await http.get(Uri.parse('$kBaseUrl/user'));
 
     // Pastikan response status code 200
     expect(response.statusCode, 200);
