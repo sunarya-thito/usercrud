@@ -37,14 +37,6 @@ const User = sequelize.define('user', {
     }
 });
 
-User.beforeCreate(async (user, options) => {
-    user.password = await bcrypt.hash(user.password, 10);
-});
-
-User.prototype.validPassword = async function (password) {
-    return await bcrypt.compare(password, this.password);
-}
-
 await sequelize.sync();
 
 const app = express();
