@@ -67,7 +67,9 @@ app.post('/login', async (req, res) => {
     });
     if (user === null) {
         res.status(401);
-        res.send('Tidak dapat login');
+        res.send({
+            error: 'Invalid username or password',
+        });
         return;
     }
     res.send(JSON.stringify({
