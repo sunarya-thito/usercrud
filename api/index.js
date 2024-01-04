@@ -7,9 +7,14 @@ import cors from 'cors';
 import pg from 'pg';
 
 // using postgres from vercel
-const sequelize = new Sequelize(process.env.POSTGRES_URL, {
+const sequelize = new Sequelize(process.env.POSTGRES_URL + '?sslmode=require', {
     dialect: 'postgres',
     dialectModule: pg, // <- PENTING UNTUK VERCEL
+    dialectOptions: {
+        ssl: {
+            rejectUnauthorized: false,
+        }
+    }
 });
 
 const User = sequelize.define('user', {
