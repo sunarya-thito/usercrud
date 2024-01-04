@@ -75,7 +75,7 @@ app.post('/login', async (req, res) => {
     if (user === null) {
         res.status(400);
         res.send({
-            error: 'Username not found',
+            error: 'Username or password is incorrect',
         });
         return;
     }
@@ -134,6 +134,7 @@ app.post('/user', async (req, res) => {
         username: username,
         name: name,
         email: email,
+        password: password,
     });
     res.send(JSON.stringify({
         userid: user.userid,
