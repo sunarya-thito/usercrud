@@ -83,17 +83,26 @@ app.post('/login', async (req, res) => {
 app.get('/user', async (req, res) => {
     vercelHeaders(res);
     let users = await User.findAll();
-    res.send(JSON.stringify(users));
+    let usersJson = [];
+    for (let user of users) {
+        usersJson.push({
+            userid: user.userid,
+            username: user.username,
+            name: user.name,
+            email: user.email,
+        });
+    }
+    res.send(JSON.stringify(usersJson));
 });
 
 // POST /user?username&password&name&email -> {userid}
 app.post('/user', async (req, res) => {
     vercelHeaders(res);
     // validasi input
-    let username = req.body.username;
-    let password = req.body.password;
-    let name = req.body.name;
-    let email = req.body.email;
+    let username = req.query.username;
+    let password = req.query.password;
+    let name = req.query.name;
+    let email = req.query.email;
     if (username === undefined || password === undefined || name === undefined || email === undefined) {
         res.status(400);
         res.send('Bad request');
@@ -101,7 +110,6 @@ app.post('/user', async (req, res) => {
     }
     let user = await User.create({
         username: username,
-        password: password,
         name: name,
         email: email,
     });
