@@ -10,11 +10,6 @@ import pg from 'pg';
 const sequelize = new Sequelize(process.env.POSTGRES_URL, {
     dialect: 'postgres',
     dialectModule: pg, // <- PENTING UNTUK VERCEL
-    dialectOptions: {
-        ssl: {
-            rejectUnauthorized: false,
-        }
-    }
 });
 
 const User = sequelize.define('user', {
