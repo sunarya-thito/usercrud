@@ -36,7 +36,7 @@ const User = sequelize.define('user', {
 
 await sequelize.sync();
 
-const app = express();
+export const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
