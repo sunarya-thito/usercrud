@@ -3,7 +3,7 @@ import { Sequelize, DataTypes } from 'sequelize';
 import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
-
+import bcrypt from 'bcrypt';
 import pg from 'pg';
 
 // using postgres from vercel
@@ -37,6 +37,14 @@ const User = sequelize.define('user', {
     }
 });
 
+User.beforeCreate(async (user, options) => {
+    user.password = await bcrypt.hash(user.password, 10);
+});
+
+User.prototype.validPassword = async function (password) {
+    return await bcrypt.compare(password, this.password);
+}
+
 await sequelize.sync();
 
 const app = express();
@@ -59,16 +67,29 @@ app.post('/login', async (req, res) => {
     vercelHeaders(res);
     let username = req.query.username;
     let password = req.query.password;
+    if (username === undefined || password === undefined) {
+        res.status(400);
+        res.send({
+            error: 'Invalid request',
+        });
+        return;
+    }
     let user = await User.findOne({
         where: {
             username: username,
-            password: password,
         }
     });
     if (user === null) {
-        res.status(401);
+        res.status(400);
         res.send({
-            error: 'Invalid username or password',
+            error: 'Username not found',
+        });
+        return;
+    }
+    if (!await user.validPassword(password)) {
+        res.status(400);
+        res.send({
+            error: 'Wrong password',
         });
         return;
     }
@@ -105,7 +126,22 @@ app.post('/user', async (req, res) => {
     let email = req.query.email;
     if (username === undefined || password === undefined || name === undefined || email === undefined) {
         res.status(400);
-        res.send('Bad request');
+        res.send({
+            error: 'Invalid request',
+        });
+        return;
+    }
+    // cek apakah username sudah ada
+    let exUser = await User.findOne({
+        where: {
+            username: username,
+        }
+    });
+    if (exUser !== null) {
+        res.status(400);
+        res.send({
+            error: 'Username already exists',
+        });
         return;
     }
     let user = await User.create({
