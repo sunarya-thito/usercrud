@@ -5,7 +5,7 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 
 // using postgres from vercel
-const sequelize = new Sequelize(process.env.DATABASE_URL, {
+const sequelize = new Sequelize(process.env.POSTGRES_URL, {
     dialect: 'postgres',
     dialectOptions: {
         ssl: {
