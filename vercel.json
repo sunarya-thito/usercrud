@@ -2,11 +2,11 @@
   "rewrites": [
     {
       "source": "/user",
-      "destination": "/api"
+      "destination": "/api/user"
     },
     {
       "source": "/login",
-      "destination": "/api"
+      "destination": "/api/login"
     }
   ]
 }
