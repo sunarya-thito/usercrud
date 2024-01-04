@@ -1,12 +1,12 @@
 {
-  "rewrites": [
+  "routes": [
     {
-      "source": "/user",
-      "destination": "/api/user"
+      "src": "/login",
+      "dest": "/api/index.js"
     },
     {
-      "source": "/login",
-      "destination": "/api/login"
+      "src": "/user",
+      "dest": "/api/user.js"
     }
   ]
 }
