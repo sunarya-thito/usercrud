@@ -40,8 +40,12 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
+function vercelHeaders(res) {
+res.setHeader('Cache-Control', 's-maxage=1, stale-while-revalidate');
+
 // POST /login?username&password -> username, name, email
 app.post('/login', async (req, res) => {
+    vercelHeaders(res);
     let username = req.query.username;
     let password = req.query.password;
     let user = await User.findOne({
@@ -64,12 +68,14 @@ app.post('/login', async (req, res) => {
 
 // GET /user -> [{userid, username, password, name, email}]
 app.get('/user', async (req, res) => {
+    vercelHeaders(res);
     let users = await User.findAll();
     res.send(JSON.stringify(users));
 });
 
 // POST /user?username&password&name&email -> {userid}
 app.post('/user', async (req, res) => {
+    vercelHeaders(res);
     // validasi input
     let username = req.body.username;
     let password = req.body.password;
