@@ -79,11 +79,11 @@ app.post('/login', async (req, res) => {
         });
         return;
     }
-    res.send(JSON.stringify({
+    res.send({
         username: user.username,
         name: user.name,
         email: user.email,
-    }));
+    });
 });
 
 // GET /user -> [{userid, username, password, name, email}]
@@ -99,7 +99,7 @@ app.get('/user', async (req, res) => {
             email: user.email,
         });
     }
-    res.send(JSON.stringify(usersJson));
+    res.send(usersJson);
 });
 
 // POST /user?username&password&name&email -> {userid}
@@ -136,7 +136,7 @@ app.post('/user', async (req, res) => {
         email: email,
         password: password,
     });
-    res.send(JSON.stringify({
+    res.send({
         userid: user.userid,
-    }));
+    });
 });
