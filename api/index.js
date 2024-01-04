@@ -86,13 +86,6 @@ app.post('/login', async (req, res) => {
         });
         return;
     }
-    if (!await user.validPassword(password)) {
-        res.status(400);
-        res.send({
-            error: 'Wrong password',
-        });
-        return;
-    }
     res.send(JSON.stringify({
         username: user.username,
         name: user.name,
