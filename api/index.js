@@ -41,7 +41,8 @@ app.use(cors());
 app.use(bodyParser.json());
 
 function vercelHeaders(res) {
-res.setHeader('Cache-Control', 's-maxage=1, stale-while-revalidate');
+    res.setHeader('Cache-Control', 's-maxage=1, stale-while-revalidate');
+}
 
 // POST /login?username&password -> username, name, email
 app.post('/login', async (req, res) => {
