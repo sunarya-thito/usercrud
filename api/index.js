@@ -4,9 +4,12 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 
+import pg from 'pg';
+
 // using postgres from vercel
 const sequelize = new Sequelize(process.env.POSTGRES_URL, {
     dialect: 'postgres',
+    dialectModule: pg, // <- PENTING UNTUK VERCEL
     dialectOptions: {
         ssl: {
             rejectUnauthorized: false,
