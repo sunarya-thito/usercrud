@@ -47,6 +47,7 @@ app.use(cors({
     allowedHeaders: '*',
     credentials: true,
 }));
+app.use(bodyParser.urlencoded());
 app.use(bodyParser.json());
 
 function vercelHeaders(res) {
