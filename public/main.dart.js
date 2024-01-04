@@ -75639,7 +75639,7 @@ s=J.bd(this.a.e,b-1)
 return new A.ms(new A.cP(B.lh,A.ai1(A.a([A.uG(A.er(J.di(s.a),r,r,r,r,r,r),1),A.uG(A.er(s.b,r,r,r,r,r,r),3),A.uG(A.er(s.c,r,r,r,r,r,r),4),A.uG(A.er(s.d,r,r,r,r,r,r),4)],t.F),B.dJ),r),r)},
 $S:457}
 A.Gm.prototype={
-O(a){return new A.vI(new A.v5(null),"Flutter Demo",A.ans(B.ah,!0),B.xh,null)}}
+O(a){return new A.vI(new A.v5(null),"User CRUD Playground",A.ans(B.ah,!0),B.xh,null)}}
 A.be.prototype={
 by(a){var s=a.a,r=this.a
 r[15]=s[15]
