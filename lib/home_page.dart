@@ -181,12 +181,6 @@ class _HomePageState extends State<HomePage> {
                                               fontWeight: FontWeight.bold)),
                                       flex: 4,
                                     ),
-                                    Expanded(
-                                      child: Text('Password',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold)),
-                                      flex: 3,
-                                    ),
                                   ],
                                 ),
                               ),
@@ -214,10 +208,6 @@ class _HomePageState extends State<HomePage> {
                                   Expanded(
                                     flex: 4,
                                     child: Text(user.email),
-                                  ),
-                                  Expanded(
-                                    child: Text(user.password ?? ''),
-                                    flex: 3,
                                   ),
                                 ],
                               ),

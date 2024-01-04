@@ -8,14 +8,12 @@ class UserDto {
   final int? id;
   final String username;
   final String name;
-  final String? password;
   final String email;
 
   UserDto({
     required this.id,
     required this.username,
     required this.name,
-    required this.password,
     required this.email,
   });
 
@@ -23,7 +21,6 @@ class UserDto {
       : id = (json['userid'] as num?)?.toInt(),
         username = json['username'],
         name = json['name'],
-        password = json['password'],
         email = json['email'];
 
   static Future<List<UserDto>> findAll() async {
@@ -40,13 +37,8 @@ class UserDto {
   static Future<int> add(
       String username, String name, String password, String email) async {
     var response = await http.post(
-      Uri.parse('$kBaseUrl/user'),
-      body: {
-        'username': username,
-        'name': name,
-        'password': password,
-        'email': email,
-      },
+      Uri.parse(
+          '$kBaseUrl/user?username=$username&name=$name&password=$password&email=$email'),
     );
     var body = response.body;
     var json = jsonDecode(body);

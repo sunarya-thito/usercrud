@@ -102,7 +102,6 @@ class _AddUserFormState extends State<AddUserForm> {
                   id: value,
                   username: _usernameController.text,
                   name: _nameController.text,
-                  password: _passwordController.text,
                   email: _emailController.text,
                 ));
               });
