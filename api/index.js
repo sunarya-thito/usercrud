@@ -69,6 +69,7 @@ app.post('/login', async (req, res) => {
     let user = await User.findOne({
         where: {
             username: username,
+            password: password,
         }
     });
     if (user === null) {
