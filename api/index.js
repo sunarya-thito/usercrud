@@ -4,9 +4,14 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 
-const sequelize = new Sequelize({
-    dialect: 'sqlite',
-    storage: './database.sqlite',
+// using postgres from vercel
+const sequelize = new Sequelize(process.env.DATABASE_URL, {
+    dialect: 'postgres',
+    dialectOptions: {
+        ssl: {
+            rejectUnauthorized: false,
+        }
+    }
 });
 
 const User = sequelize.define('user', {
